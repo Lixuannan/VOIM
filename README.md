@@ -7,7 +7,15 @@
 - 一键编译运行（已实现，现支持 C/C++ 以及 Python）
 - 一键提交到 OJ （计划实现，或许很快完成）
 
-使用这个插件是极其简单的，你可以到 Releases 下载编译好的二进制文件并把它放到 `bin` 目录里面。然后在插件列表中加入该插件即可
+使用这个插件是极其简单的，在插件列表中加入该插件即可。
+
+如果你使用的是 vim-plug，你可以在 `.vimrc` 键入以下内容：
+
+```vimrc
+call plug#begin('~/.vim/plugged')
+  Plug 'lixuannan/VOIM'
+call plug#end()
+```
 
 
 
