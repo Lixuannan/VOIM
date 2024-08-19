@@ -111,7 +111,8 @@ if work_type == "runcode":
         else:
             run(os.path.join('./', f"{filename}.out"))
     else:
-        print("\033[1;31mCompile Error, won't run\033[m")
+        print("\033[1;31mUnsupport filetype detected, run failed\033[m")
+        exit(0)
 elif work_type == "judgecode":
     if not os.path.exists(f"{filename}.data"):
         print("\033[1;37mData not found, now you can open your browser and click the Competitive Companion in order to get some data.\033[m")
