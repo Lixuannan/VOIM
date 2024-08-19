@@ -95,7 +95,7 @@ work_type = sys.argv[1]
 filename = sys.argv[2]
 filetype = filename.split('.')[-1]
 
-if work_type == "run":
+if work_type == "runcode":
     if filetype == 'cpp' or filetype == 'cc':
         returncode = compile(filename, "g++")
         if returncode != 0:
@@ -112,7 +112,7 @@ if work_type == "run":
             run(os.path.join('./', f"{filename}.out"))
     else:
         print("\033[1;31mCompile Error, won't run\033[m")
-elif work_type == "judge":
+elif work_type == "judgecode":
     if not os.path.exists(f"{filename}.data"):
         print("\033[1;37mData not found, now you can open your browser and click the Competitive Companion in order to get some data.\033[m")
         get_data(f"{filename}.data")
