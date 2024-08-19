@@ -37,3 +37,18 @@ vmap <F6> <esc> :JudgeCode %<CR>
 
 如果你得到报错 `Unsupport filetype detected, run failed` 但是你的代码后缀名没有问题，请你检查你的光标是否在你需要的文件上。
 
+在最新版本的插件中，我们支持自定义编译器以及编译参数，你可以在用户的 `HOME` 目录中创建文件 `.VOIM.conf` 并写下配置。下面展示的文件为默认配置：
+
+```cpp
+# C 语言编译器
+C_COMPILER = "gcc"
+# C++ 编译器
+CPP_COMPILER = "g++"
+# Python 解释器
+PYTHON_INTERPRETER = "python"
+# C 编译选项
+C_ARGV = "-Wextra -g"
+# C++ 编译选项
+CPP_ARGV = "-Wextra -g"
+```
+

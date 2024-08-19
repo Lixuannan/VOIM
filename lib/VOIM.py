@@ -9,9 +9,22 @@ import json
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 
+C_COMPILER = "gcc"
+CPP_COMPILER = "g++"
+PYTHON_INTERPRETER = "python"
+C_ARGV = "-Wextra -g"
+CPP_ARGV = "-Wextra -g"
 
-def compile(filename: str, compiler: str) -> int:
-    pro = subprocess.Popen(f"{compiler} -Wextra -o {filename}.out {filename}".split(" "), stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+
+try:
+    with open(os.path.join(os.environ["HOME"], ".VOIM.conf"), "rt") as f:
+        exec(f.read())
+except FileNotFoundError:
+    print("\033[1;33mConfig file not found, using default config\033[m")
+
+
+def compile(filename: str, compiler: str, argv: str) -> int:
+    pro = subprocess.Popen(f"{compiler} {argv} -o {filename}.out {filename}".split(" "), stderr=subprocess.PIPE, stdout=subprocess.PIPE)
     output, error = pro.communicate()
     exit_code = pro.returncode
     
@@ -21,15 +34,16 @@ def compile(filename: str, compiler: str) -> int:
 
 
 def run(cmd):
-    print(cmd)
-    start_time = time.process_time()
+    start_cpu_time = time.process_time()
+    start_real_time = time.time()
     pro = subprocess.Popen(cmd.split(" "), stderr=subprocess.PIPE, stdout=subprocess.PIPE)
     output, error = pro.communicate()
-    end_time = time.process_time()
+    end_cpu_time = time.process_time()
+    end_real_time = time.time()
     exit_code = pro.returncode
     
     print(f"{output.decode('utf-8')}\n{error.decode('utf-8')}")
-    print(f"\033[1;37mProcess ended with code {exit_code}, cpu time: {end_time - start_time}\033[m")
+    print(f"\033[1;37mProcess ended with code {exit_code}, real time: {round(end_real_time - start_real_time, 6)}s, cpu time: {round(end_cpu_time - start_cpu_time, 6)}s\033[m")
 
 
 def judge(cmd, time_limit, filename, input_, output):
@@ -97,15 +111,15 @@ filetype = filename.split('.')[-1]
 
 if work_type == "runcode":
     if filetype == 'cpp' or filetype == 'cc':
-        returncode = compile(filename, "g++")
+        returncode = compile(filename, CPP_COMPILER, CPP_ARGV)
         if returncode != 0:
             print("\033[1;31mCompile Error, won't run\033[m")
         else:
             run(os.path.join('./', f"{filename}.out"))
     elif filetype == 'py':
-        run(f"python {filename}")
+        run(f"{PYTHON_INTERPRETER} {filename}")
     elif filetype == 'c':
-        returncode = compile(filename, 'cc')
+        returncode = compile(filename, C_COMPILER, C_ARGV)
         if returncode != 0:
             print("\033[1;31mCompile Error, won't run\033[m")
         else:
@@ -119,12 +133,12 @@ elif work_type == "judgecode":
         get_data(f"{filename}.data")
 
     if filetype == 'cpp' or filetype == 'cc':
-        returncode = compile(filename, "g++")
+        returncode = compile(filename, CPP_COMPILER, CPP_ARGV)
         if returncode != 0:
             print("\033[1;31mCompile Error, won't run\033[m")
             exit(0)
     elif filetype == 'c':
-        returncode = compile(filename, 'cc')
+        returncode = compile(filename, C_COMPILER, C_ARGV)
         if returncode != 0:
             print("\033[1;31mCompile Error, won't run\033[m")
             exit(0)
@@ -138,7 +152,7 @@ elif work_type == "judgecode":
         if filetype == "cpp" or filetype == "cc" or filetype == "c":
             judge(os.path.join('./', f"{filename}.out"), data["timeLimit"] / 1000, filename, data['tests'][i]['input'], data['tests'][i]['output'])
         elif filetype == 'python':
-            judge(f"python {filename}", data["timeLimit"] / 1000, filename, data['tests'][i]['input'], data['tests'][i]['output'])
+            judge(f"{PYTHON_INTERPRETER} {filename}", data["timeLimit"] / 1000, filename, data['tests'][i]['input'], data['tests'][i]['output'])
         else:
             print("\033[1;31mUnsupport filetype detected, run failed\033[m")
             exit(0)
