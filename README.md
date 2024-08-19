@@ -19,7 +19,7 @@ call plug#end()
 
 然后在 vim 中输入命令 `:PlugInstall`。要更新插件，请在 vim 中输入命令 `:PlugUpdate`。
 
-我们定义了一个一键编译运行的命令 `RunCode`，以及一键评测样例的命令 `:JudgeCode` 如果你要自定义快捷键，可以在 `.vimrc` 中这样写：
+我们定义了一个一键编译运行的命令 `RunCode`，以及一键评测样例的命令 `JudgeCode` 如果你要自定义快捷键，可以在 `.vimrc` 中这样写：
 
 ```vimrc
 "设置全局的快捷键，其中 % 为当前文件的文件名
