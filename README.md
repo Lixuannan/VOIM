@@ -23,15 +23,15 @@ call plug#end()
 
 ```vimrc
 "设置全局的快捷键，其中 % 为当前文件的文件名
-map <F5> :RunCode % <CR>
+map <F5> :RunCode %<CR>
 "设置插入模式的快捷键
-imap <F5> <esc> :RunCode % <CR>
+imap <F5> <esc> :RunCode %<CR>
 "设置选择模式的快捷键
-vmap <F5> <esc> :RunCode % <CR>
+vmap <F5> <esc> :RunCode %<CR>
 
-map <F6> :JudgeCode % <CR>
-imap <F6> <esc> :JudgeCode % <CR>
-vmap <F6> <esc> :JudgeCode % <CR>
+map <F6> :JudgeCode %<CR>
+imap <F6> <esc> :JudgeCode %<CR>
+vmap <F6> <esc> :JudgeCode %<CR>
 
 ```
 

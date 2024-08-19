@@ -95,9 +95,6 @@ work_type = sys.argv[1]
 filename = sys.argv[2]
 filetype = filename.split('.')[-1]
 
-print(filetype)
-print(str(sys.argv))
-
 if work_type == "runcode":
     if filetype == 'cpp' or filetype == 'cc':
         returncode = compile(filename, "g++")
