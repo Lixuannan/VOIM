@@ -21,6 +21,7 @@ def compile(filename: str, compiler: str) -> int:
 
 
 def run(cmd):
+    print(cmd)
     start_time = time.process_time()
     pro = subprocess.Popen(cmd.split(" "), stderr=subprocess.PIPE, stdout=subprocess.PIPE)
     output, error = pro.communicate()
@@ -94,14 +95,13 @@ work_type = sys.argv[1]
 filename = sys.argv[2]
 filetype = filename.split('.')[-1]
 
-
 if work_type == "run":
     if filetype == 'cpp' or filetype == 'cc':
         returncode = compile(filename, "g++")
         if returncode != 0:
             print("\033[1;31mCompile Error, won't run\033[m")
         else:
-            run(f"./{filename}.out")
+            run(os.path.join('./', f"{filename}.out"))
     elif filetype == 'py':
         run(f"python {filename}")
     elif filetype == 'c':
@@ -109,7 +109,7 @@ if work_type == "run":
         if returncode != 0:
             print("\033[1;31mCompile Error, won't run\033[m")
         else:
-            run(f"./{filename}.out")
+            run(os.path.join('./', f"{filename}.out"))
     else:
         print("\033[1;31mCompile Error, won't run\033[m")
 elif work_type == "judge":
@@ -135,7 +135,7 @@ elif work_type == "judge":
     for i in range(len(data["tests"])):
         print(f"Case {i + 1}: ", end="")
         if filetype == "cpp" or filetype == "cc" or filetype == "c":
-            judge(f"./{filename}.out", data["timeLimit"] / 1000, filename, data['tests'][i]['input'], data['tests'][i]['output'])
+            judge(os.path.join('./', f"{filename}.out"), data["timeLimit"] / 1000, filename, data['tests'][i]['input'], data['tests'][i]['output'])
         elif filetype == 'python':
             judge(f"python {filename}", data["timeLimit"] / 1000, filename, data['tests'][i]['input'], data['tests'][i]['output'])
         else:
