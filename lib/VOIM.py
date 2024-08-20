@@ -123,11 +123,11 @@ if work_type == "runcode":
         if returncode != 0:
             print("\033[1;31mCompile Error, won't run\033[m")
         else:
-            run(os.path.join('./', filebase)
+            run(os.path.join('./', filebase))
     elif filetype == 'py':
         run(f"{PYTHON_INTERPRETER} {filename}")
     elif filetype == 'c':
-        returncode = compile(filename, C_COMPILER, C_ARGV)
+        returncode = compile(filename, filebase, C_COMPILER, C_ARGV)
         if returncode != 0:
             print("\033[1;31mCompile Error, won't run\033[m")
         else:
@@ -141,12 +141,12 @@ elif work_type == "judgecode":
         get_data(f"{filename}.data")
 
     if filetype == 'cpp' or filetype == 'cc':
-        returncode = compile(filename, CPP_COMPILER, CPP_ARGV)
+        returncode = compile(filename, filebase, CPP_COMPILER, CPP_ARGV)
         if returncode != 0:
             print("\033[1;31mCompile Error, won't run\033[m")
             exit(0)
     elif filetype == 'c':
-        returncode = compile(filename, C_COMPILER, C_ARGV)
+        returncode = compile(filename, filebase, C_COMPILER, C_ARGV)
         if returncode != 0:
             print("\033[1;31mCompile Error, won't run\033[m")
             exit(0)
