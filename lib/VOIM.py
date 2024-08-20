@@ -24,7 +24,7 @@ except FileNotFoundError:
 
 
 def compile(filename: str, compiler: str, argv: str) -> int:
-    pro = subprocess.Popen(f"{compiler} {argv} -o {filename}.out {filename}".split(" "), stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+    pro = subprocess.Popen(f"{compiler} {argv} -o {filename}.bin {filename}".split(" "), stderr=subprocess.PIPE, stdout=subprocess.PIPE)
     output, error = pro.communicate()
     exit_code = pro.returncode
     
@@ -52,7 +52,7 @@ def judge(cmd, time_limit, filename, input_, output):
     with open(f"{filename}.ans", "wt") as f:
         f.write(output)
     
-    cmd += f" < {filename}.in > {filename}.output"
+    cmd += f" < {filename}.in > {filename}.out"
     start_time = time.process_time()
     exit_code = os.system(cmd)
     end_time = time.process_time()
@@ -62,7 +62,7 @@ def judge(cmd, time_limit, filename, input_, output):
         return
 
     diff = ""
-    for i in os.popen(f"diff -ZB {filename}.output {filename}.ans"):
+    for i in os.popen(f"diff -ZB {filename}.out {filename}.ans"):
         diff += i
 
     if end_time - start_time > time_limit:
