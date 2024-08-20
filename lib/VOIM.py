@@ -115,7 +115,7 @@ if work_type == "runcode":
         if returncode != 0:
             print("\033[1;31mCompile Error, won't run\033[m")
         else:
-            run(os.path.join('./', f"{filename}.out"))
+            run(os.path.join('./', f"{filename}.bin"))
     elif filetype == 'py':
         run(f"{PYTHON_INTERPRETER} {filename}")
     elif filetype == 'c':
@@ -123,7 +123,7 @@ if work_type == "runcode":
         if returncode != 0:
             print("\033[1;31mCompile Error, won't run\033[m")
         else:
-            run(os.path.join('./', f"{filename}.out"))
+            run(os.path.join('./', f"{filename}.bin"))
     else:
         print("\033[1;31mUnsupport filetype detected, run failed\033[m")
         exit(0)
@@ -150,7 +150,7 @@ elif work_type == "judgecode":
     for i in range(len(data["tests"])):
         print(f"Case {i + 1}: ", end="")
         if filetype == "cpp" or filetype == "cc" or filetype == "c":
-            judge(os.path.join('./', f"{filename}.out"), data["timeLimit"] / 1000, filename, data['tests'][i]['input'], data['tests'][i]['output'])
+            judge(os.path.join('./', f"{filename}.bin"), data["timeLimit"] / 1000, filename, data['tests'][i]['input'], data['tests'][i]['output'])
         elif filetype == 'python':
             judge(f"{PYTHON_INTERPRETER} {filename}", data["timeLimit"] / 1000, filename, data['tests'][i]['input'], data['tests'][i]['output'])
         else:
