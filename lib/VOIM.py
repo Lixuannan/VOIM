@@ -15,7 +15,7 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 C_COMPILER = "gcc"
 CPP_COMPILER = "g++"
 PYTHON_INTERPRETER = "python"
-C_ARGV = "-Wextra -g"
+C_ARGV = "-Wextra -g -lm"
 CPP_ARGV = "-Wextra -g"
 DEBUGGER = "insight"
 
