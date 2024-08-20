@@ -109,4 +109,4 @@ sudo apt install insight
 
 安装后你只需要调用 `:DebugCode /some/code/file.cpp` 或者按下你所设置的快捷键来进行编译并调试。关于 Insight 软件的使用方法，可以自行上网查找。
 
-![](./demo-debug-code.gif)
+![](./demo/demo-debug-code.gif)
