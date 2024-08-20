@@ -6,6 +6,8 @@ This is a Vim plugin.
 
 这是一个 VIM 插件。
 
+Things you have to know: this plugin only support Unix-like Operating System.
+
 ## Features
 
 This plugin is designed to provide a more convenient Vim experience for OIers with the following features:
