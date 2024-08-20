@@ -1,6 +1,6 @@
 # VOIM - Vim OI Improve
 
-[🇬🇧 ENG](./README.md) | [🇨🇳 中文](./README_zh.md)
+[ENG](./README.md) | [中文](./README_zh.md)
 
 This is a Vim plugin.
 
