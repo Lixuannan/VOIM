@@ -104,13 +104,7 @@ This feature requires the Insight software. You can search online for *how to in
 #### Arch Linux
 
 ```bash
-sudo pacman -S insight
-```
-
-#### Ubuntu / Debian
-
-```bash
-sudo apt install insight
+yay -S insight
 ```
 
 After installation, you only need to call `:DebugCode /some/code/file.cpp` or press your configured shortcut to compile and debug. You can search online for instructions on how to use Insight software.
