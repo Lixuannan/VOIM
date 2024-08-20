@@ -34,4 +34,3 @@ EOF
 :command -nargs=1 RunCode !~/.VOIM.py runcode <q-args>
 :command -nargs=1 JudgeCode !~/.VOIM.py judgecode <q-args>
 
-

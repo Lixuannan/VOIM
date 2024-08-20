@@ -23,8 +23,8 @@ except FileNotFoundError:
     print("\033[1;33mConfig file not found, using default config\033[m")
 
 
-def compile(filename: str, compiler: str, argv: str) -> int:
-    pro = subprocess.Popen(f"{compiler} {argv} -o {filename}.bin {filename}".split(" "), stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+def compile(filename: str, outfile: str, compiler: str, argv: str) -> int:
+    pro = subprocess.Popen(f"{compiler} {argv} -o {outfile} {filename}".split(" "), stderr=subprocess.PIPE, stdout=subprocess.PIPE)
     output, error = pro.communicate()
     exit_code = pro.returncode
     
@@ -108,14 +108,22 @@ def get_data(data_path: str):
 work_type = sys.argv[1]
 filename = sys.argv[2]
 filetype = filename.split('.')[-1]
+filebase = list(filename)
+
+while filebase[-1] != '.':
+    filebase.pop(-1)
+
+filebase.pop(-1)
+filebase = "".join(filebase)
+
 
 if work_type == "runcode":
     if filetype == 'cpp' or filetype == 'cc':
-        returncode = compile(filename, CPP_COMPILER, CPP_ARGV)
+        returncode = compile(filename, filebase, CPP_COMPILER, CPP_ARGV)
         if returncode != 0:
             print("\033[1;31mCompile Error, won't run\033[m")
         else:
-            run(os.path.join('./', f"{filename}.bin"))
+            run(os.path.join('./', filebase)
     elif filetype == 'py':
         run(f"{PYTHON_INTERPRETER} {filename}")
     elif filetype == 'c':
@@ -123,7 +131,7 @@ if work_type == "runcode":
         if returncode != 0:
             print("\033[1;31mCompile Error, won't run\033[m")
         else:
-            run(os.path.join('./', f"{filename}.bin"))
+            run(os.path.join('./', filebase))
     else:
         print("\033[1;31mUnsupport filetype detected, run failed\033[m")
         exit(0)
@@ -150,7 +158,7 @@ elif work_type == "judgecode":
     for i in range(len(data["tests"])):
         print(f"Case {i + 1}: ", end="")
         if filetype == "cpp" or filetype == "cc" or filetype == "c":
-            judge(os.path.join('./', f"{filename}.bin"), data["timeLimit"] / 1000, filename, data['tests'][i]['input'], data['tests'][i]['output'])
+            judge(os.path.join('./', filebase), data["timeLimit"] / 1000, filename, data['tests'][i]['input'], data['tests'][i]['output'])
         elif filetype == 'python':
             judge(f"{PYTHON_INTERPRETER} {filename}", data["timeLimit"] / 1000, filename, data['tests'][i]['input'], data['tests'][i]['output'])
         else:
