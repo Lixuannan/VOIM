@@ -8,6 +8,8 @@ This is a Vim plugin.
 
 Things you have to know: this plugin only support Unix-like Operating System.
 
+一些您需要知道的问题：这个插件仅支持类 Unix 系统。
+
 ## Features
 
 This plugin is designed to provide a more convenient Vim experience for OIers with the following features:
