@@ -5,7 +5,7 @@ import subprocess
 
 
 path = os.path.join(os.environ["HOME"], ".VOIM.py")
-if not os.path.exist(path):
+if not os.path.exists(path):
     print("Start downloading reqirements")
     process = subprocess.Popen(f"curl https://raw.githubusercontent.com/Lixuannan/VOIM/main/lib/VOIM.py -o {path}".split(" "), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     output, error = process.communicate()
