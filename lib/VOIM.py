@@ -194,5 +194,19 @@ elif work_type == "judgecode":
             exit(0)
 elif work_type == "update":
     check_for_update()
+elif work_type == "debug":
+    if filetype == "cpp" or filetype == "cc":
+        compile(filename, filebase, CPP_COMPILER, "-g")
+    elif filetype == "c":
+        compile(filename, filebase, C_COMPILER, "-g")
+    else:
+        print("\033[1;31mUnsupport filetype detected, run failed\033[m")
+        exit(0)
+    
+    try:
+        process = subprocess.Popen(f"insight {filebase}".split(" "))
+        process.wait()
+    except FileNotFoundError:
+        print("\033[1;31mNo debugger found, please follow the install guide from https://sourceware.org/insight/downloads.php and install insight\033[m")
 
 

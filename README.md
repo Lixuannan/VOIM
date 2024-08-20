@@ -8,6 +8,7 @@
 
 - 一键编译运行（已实现，现支持 C/C++ 以及 Python）
 - 一键评测样例（基于 Competitive Companion，已完成）
+- 一键编译并调试（需要 Insight 的支持）
 
 ## 安装
 
@@ -40,6 +41,10 @@ vmap <F5> <esc> :RunCode %<CR>
 map <F6> :JudgeCode %<CR>
 imap <F6> <esc> :JudgeCode %<CR>
 vmap <F6> <esc> :JudgeCode %<CR>
+
+map <F7> :DebugCode %<CR>
+imap <F7> <esc> :DebugCode %<CR>
+vmap <F7> <esc> :DebugCode %<CR>
 ```
 
 在最新版本的插件中，我们支持自定义编译器以及编译参数，你可以在用户的 `HOME` 目录中创建文件 `.VOIM.conf` 并写下配置。下面展示的文件为默认配置：
@@ -85,3 +90,23 @@ CPP_ARGV = "-Wextra -g"
 需要特别指出的是，本插件并不支持 MLE，即内存超限的判罚。同时 TLE 的判罚是基于 Real Time 而不是 CPU Time 的。为了方便各位调试，RE 的报错会提供返回值以及其对应的可能错误，但是不保证对应正确，仅供参考。
 
 ![](./demo/demo-judge-code.gif)
+
+### 一键编译调试
+
+这个功能需要 Insight 软件，你可以在网上搜索 ~如何安装 Insight 调试器~ 来查询如何安装。下面可以提供一些常见系统的安装命令：
+
+#### Arch Linux
+
+```bash
+sudo pacman -S insight
+```
+
+#### Ubuntu / Debian
+
+```bash
+sudo apt install insight
+```
+
+安装后你只需要调用 `:DebugCode /some/code/file.cpp` 或者按下你所设置的快捷键来进行编译并调试。关于 Insight 软件的使用方法，可以自行上网查找。
+
+![](./demo-debug-code.gif)
