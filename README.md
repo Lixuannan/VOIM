@@ -75,10 +75,10 @@ CPP_ARGV = "-Wextra -g"
 
 评测后将有可能返回以下结果：
 
-- Accept，即通过
-- Time Limite Exceeded，时间超限
-- Runtime Error，运行时错误
-- Wrong Answer，答案错误
+- <span style="color: green">Accept</span>，即通过
+- <span style="color: yellow">Time Limite Exceeded</span>，时间超限
+- <span style="color: purple">Runtime Error</span>，运行时错误
+- <span style="color: red">Wrong Answer</span>，答案错误
 
 需要特别指出的是，本插件并不支持 MLE，即内存超限的判罚。同时 TLE 的判罚是基于 Real Time 而不是 CPU Time 的。为了方便各位调试，RE 的报错会提供返回值以及其对应的可能错误，但是不保证对应正确，仅供参考。
 
