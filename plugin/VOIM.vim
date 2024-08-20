@@ -4,26 +4,31 @@ import os.path
 import subprocess
 
 
+path = os.path.join(os.environ["HOME"], ".VOIM.py")
 try:
     print("Checking for update")
-    with open(os.path.join(os.environ["HOME"], ".VOIM.py"), "rb") as f:
-        origin = f.read()
-    process = subprocess.Popen("curl http://github.com/lixuannan/VOIM/lib/VOIM.py -o ~/.VOIM.py".split(" "), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    os.rename(path, path + ".bak")
+    process = subprocess.Popen(f"curl https://raw.githubusercontent.com/Lixuannan/VOIM/main/lib/VOIM.py -o {path}".split(" "), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     output, error = process.communicate()
     returncode = process.returncode
     if returncode:
         print("Download failed, rolling back, please don't close this window")
-        with open(os.path.join(os.environ["HOME"], ".VOIM.py"), "wb") as f:
-            f.write(origin)
+        os.rename(path + ".bak", path)
         print("Done with rollback")
+    else:
+        print("Success")
 except FileNotFoundError:
     print("Start downloading reqirements")
-    process = subprocess.Popen("curl http://github.com/lixuannan/VOIM/lib/VOIM.py -o ~/.VOIM.py".split(" "), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    process = subprocess.Popen(f"curl https://raw.githubusercontent.com/Lixuannan/VOIM/main/lib/VOIM.py -o {path}".split(" "), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     output, error = process.communicate()
     returncode = process.returncode
 
     if returncode:
         print("Download failed, missing reqirement, please try again later")
+    else:
+        print("Success")
+for _ in os.popen(f"chmod 777 {path}"):
+    ...
 EOF
 
 :command -nargs=1 RunCode !~/.VOIM.py runcode <q-args>
