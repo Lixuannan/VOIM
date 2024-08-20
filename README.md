@@ -12,7 +12,7 @@ This plugin is designed to provide a more convenient Vim experience for OIers wi
 
 - One-click Compile and Run (implemented, currently supports C/C++ and Python)
 - One-click Sample Testing (based on Competitive Companion, completed)
-- One-click Compile and Debug (requires Insight support)
+- One-click Compile and Debug (requires Insight support if you use default setting)
 
 ## Installation
 
@@ -64,6 +64,8 @@ PYTHON_INTERPRETER = "python"
 C_ARGV = "-Wextra -g"
 # C++ compilation options
 CPP_ARGV = "-Wextra -g"
+# Debugger command
+DEBUGGER = "insight"
 ```
 
 ## Usage Help

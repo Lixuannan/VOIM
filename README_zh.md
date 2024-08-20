@@ -12,7 +12,7 @@ This is a Vim plugin.
 
 - 一键编译运行（已实现，现支持 C/C++ 以及 Python）
 - 一键评测样例（基于 Competitive Companion，已完成）
-- 一键编译并调试（需要 Insight 的支持）
+- 一键编译并调试（如果你使用默认设置，需要 Insight 的支持）
 
 ## 安装
 
@@ -61,9 +61,11 @@ CPP_COMPILER = "g++"
 # Python 解释器
 PYTHON_INTERPRETER = "python"
 # C 编译选项
-C_ARGV = "-Wextra -g"
+C_ARGV = "-Wextra -g -lm"
 # C++ 编译选项
 CPP_ARGV = "-Wextra -g"
+# 默认调试器
+DEBUGGER = "insight"
 ```
 
 ## 使用帮助
@@ -84,20 +86,20 @@ CPP_ARGV = "-Wextra -g"
 
 当你需要这个功能的时候，你可以按下快捷键或者输入命令 `:JudgeCode /some/code/file.cpp`，如果插件检测到了之前保存的数据文件，那么就会直接评测，如果没有，程序会提示你需要打开浏览器，这时你就需要打开浏览器，然后左键单击 Competitive Companion 插件。此时浏览器插件就会将数据发送到 VOIM，然后 VOIM 就会处理数据，编译并评测。
 
-评测后将有可能返回以下结果：
+一般地评测后有可能返回以下结果：
 
 - Accept，即通过
 - Time Limite Exceeded，时间超限
 - Runtime Error，运行时错误
 - Wrong Answer，答案错误
 
-需要特别指出的是，本插件并不支持 MLE，即内存超限的判罚。同时 TLE 的判罚是基于 Real Time 而不是 CPU Time 的。为了方便各位调试，RE 的报错会提供返回值以及其对应的可能错误，但是不保证对应正确，仅供参考。
+特别地，本插件并不支持 MLE，即内存超限的判罚。同时 TLE 的判罚是基于 Real Time 而不是 CPU Time 的。为了方便各位调试，RE 的报错会提供返回值以及其对应的可能错误，但是不保证对应正确，仅供参考。
 
 ![](./demo/demo-judge-code.gif)
 
 ### 一键编译调试
 
-这个功能需要 Insight 软件，你可以在网上搜索 *如何安装 Insight 调试器* 来查询如何安装。下面可以提供一些常见系统的安装命令：
+这个功能可能需要 Insight 软件，你可以在网上搜索 *如何安装 Insight 调试器* 来查询如何安装。下面可以提供一些常见系统的安装命令：
 
 #### Arch Linux
 
@@ -111,6 +113,6 @@ sudo pacman -S insight
 sudo apt install insight
 ```
 
-安装后你只需要调用 `:DebugCode /some/code/file.cpp` 或者按下你所设置的快捷键来进行编译并调试。关于 Insight 软件的使用方法，可以自行上网查找。
+安装后你只需要调用 `:DebugCode /some/code/file.cpp` 或者按下你所设置的快捷键来进行编译并调试。关于 Insight 软件或其他调试器的使用方法，可以自行上网查找。
 
 ![](./demo/demo-debug-code.gif)

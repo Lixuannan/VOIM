@@ -17,6 +17,7 @@ CPP_COMPILER = "g++"
 PYTHON_INTERPRETER = "python"
 C_ARGV = "-Wextra -g"
 CPP_ARGV = "-Wextra -g"
+DEBUGGER = "insight"
 
 
 try:
