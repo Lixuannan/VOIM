@@ -192,7 +192,7 @@ elif work_type == "judgecode":
         else:
             print("\033[1;31mUnsupport filetype detected, run failed\033[m")
             exit(0)
-else if work_type == "update":
+elif work_type == "update":
     check_for_update()
 
 
