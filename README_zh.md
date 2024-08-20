@@ -6,6 +6,10 @@ This is a Vim plugin.
 
 这是一个 VIM 插件。
 
+Things you have to know: this plugin only support Unix-like Operating System.
+
+一些您需要知道的问题：这个插件仅支持类 Unix 系统。
+
 ## 功能
 
 这个插件用于为 OIer 提供更方便的 VIM 使用体验，其功能如下：
