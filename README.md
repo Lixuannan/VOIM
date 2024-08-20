@@ -1,20 +1,24 @@
 # VOIM - Vim OI Improve
 
+[ENG](./README.md) | [中文](./README_zh.md)
+
+This is a Vim plugin.
+
 这是一个 VIM 插件。
 
-## 功能
+## Features
 
-这个插件用于为 OIer 提供更方便的 VIM 使用体验，其功能如下：
+This plugin is designed to provide a more convenient Vim experience for OIers with the following features:
 
-- 一键编译运行（已实现，现支持 C/C++ 以及 Python）
-- 一键评测样例（基于 Competitive Companion，已完成）
-- 一键编译并调试（需要 Insight 的支持）
+- One-click Compile and Run (implemented, currently supports C/C++ and Python)
+- One-click Sample Testing (based on Competitive Companion, completed)
+- One-click Compile and Debug (requires Insight support)
 
-## 安装
+## Installation
 
-使用这个插件是极其简单的，在插件列表中加入该插件即可。可喜可贺的是，这个插件目前已经支持了近乎所有的插件管理器。
+Installing this plugin is very straightforward. Simply add it to your plugin list. The good news is that this plugin currently supports almost all plugin managers.
 
-如果你使用的是 vim-plug，你可以在 `.vimrc` 键入以下内容：
+If you are using vim-plug, you can add the following to your `.vimrc`:
 
 ```vimrc
 call plug#begin('~/.vim/plugged')
@@ -22,20 +26,20 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 ```
 
-然后在 vim 中输入命令 `:PlugInstall`。要更新插件，请在 vim 中输入命令 `:PlugUpdate`。
+Then, run the command `:PlugInstall` in Vim. To update the plugin, use the command `:PlugUpdate` in Vim.
 
-由于插件的特殊性，无论你使用的是什么插件管理器，你都需要在使用对应插件的更新命令的同时使用 `:UpdateVOIM` 命令来更新 VOIM 的必要运行组件。 
+Due to the plugin's specific nature, regardless of the plugin manager you use, you need to use the `:UpdateVOIM` command to update the necessary runtime components of VOIM along with the corresponding plugin manager's update command.
 
-## 配置
+## Configuration
 
-我们定义了一个一键编译运行的命令 `:RunCode`，以及一键评测样例的命令 `:JudgeCode` 如果你要自定义快捷键，可以在 `.vimrc` 中这样写：
+We define a command for one-click compile and run as `:RunCode`, and a command for one-click sample testing as `:JudgeCode`. If you want to customize the shortcuts, you can add the following to your `.vimrc`:
 
 ```vimrc
-"设置全局的快捷键，其中 % 为当前文件的文件名
+" Set global shortcuts, where % represents the current file name
 map <F5> :RunCode %<CR>
-"设置插入模式的快捷键
+" Set insert mode shortcuts
 imap <F5> <esc> :RunCode %<CR>
-"设置选择模式的快捷键
+" Set visual mode shortcuts
 vmap <F5> <esc> :RunCode %<CR>
 
 map <F6> :JudgeCode %<CR>
@@ -47,53 +51,53 @@ imap <F7> <esc> :DebugCode %<CR>
 vmap <F7> <esc> :DebugCode %<CR>
 ```
 
-在最新版本的插件中，我们支持自定义编译器以及编译参数，你可以在用户的 `HOME` 目录中创建文件 `.VOIM.conf` 并写下配置。下面展示的文件为默认配置：
+In the latest version of the plugin, we support custom compilers and compilation parameters. You can create a file `.VOIM.conf` in the user's `HOME` directory and write your configuration there. The following file shows the default configuration:
 
 ```cpp
-# C 语言编译器
+# C compiler
 C_COMPILER = "gcc"
-# C++ 编译器
+# C++ compiler
 CPP_COMPILER = "g++"
-# Python 解释器
+# Python interpreter
 PYTHON_INTERPRETER = "python"
-# C 编译选项
+# C compilation options
 C_ARGV = "-Wextra -g"
-# C++ 编译选项
+# C++ compilation options
 CPP_ARGV = "-Wextra -g"
 ```
 
-## 使用帮助
+## Usage Help
 
-如果你得到报错 `Unsupport filetype detected, run failed` 但是你的代码后缀名没有问题，请你检查你的光标是否在你需要的文件上。
+If you receive the error `Unsupport filetype detected, run failed` but your code file extension is correct, please check if your cursor is on the file you need.
 
-### 一键编译运行
+### One-click Compile and Run
 
-如果你的文件没有问题，那么当你按下配置的快捷键或者输入命令 `:RunCode /some/code/file.cpp` 的时候程序就会自动的根据配置进行编译，然后运行。通常来说会输出编译的所有信息，包括警告、报错等等。编译完成后，程序会自动运行，你只需要正常的与你的代码交互即可。
+If your file is correct, pressing the configured shortcut or entering the command `:RunCode /some/code/file.cpp` will automatically compile and run the program according to the configuration. It will usually output all compilation information, including warnings and errors. After compilation, the program will run automatically, and you can interact with your code as usual.
 
-编译运行结束后，插件会输出你的代码的返回值，以及运行时长以方便调试。
+After the compilation and running, the plugin will output the return value of your code and the runtime for debugging purposes.
 
 ![](./demo/demo-run-code.gif)
 
-### 一键评测样例
+### One-click Sample Testing
 
-这个功能需要浏览器插件 Competitive Companion 的支持，你可以前往他的 [github 仓库]()或者在插件应用商店安装。
+This feature requires the Competitive Companion browser plugin. You can visit its [GitHub repository](https://github.com/jmerle/competitive-companion) or install it from the plugin application store.
 
-当你需要这个功能的时候，你可以按下快捷键或者输入命令 `:JudgeCode /some/code/file.cpp`，如果插件检测到了之前保存的数据文件，那么就会直接评测，如果没有，程序会提示你需要打开浏览器，这时你就需要打开浏览器，然后左键单击 Competitive Companion 插件。此时浏览器插件就会将数据发送到 VOIM，然后 VOIM 就会处理数据，编译并评测。
+When you need this feature, you can press the shortcut or enter the command `:JudgeCode /some/code/file.cpp`. If the plugin detects previously saved data files, it will directly test the code. If not, the program will prompt you to open the browser. At this point, you need to open the browser and click on the Competitive Companion plugin. The browser plugin will send the data to VOIM, which will then handle the data, compile, and test it.
 
-评测后将有可能返回以下结果：
+After testing, the results may include:
 
-- Accept，即通过
-- Time Limite Exceeded，时间超限
-- Runtime Error，运行时错误
-- Wrong Answer，答案错误
+- Accept, which means passed
+- Time Limit Exceeded, which means time exceeded
+- Runtime Error, which means runtime error
+- Wrong Answer, which means incorrect answer
 
-需要特别指出的是，本插件并不支持 MLE，即内存超限的判罚。同时 TLE 的判罚是基于 Real Time 而不是 CPU Time 的。为了方便各位调试，RE 的报错会提供返回值以及其对应的可能错误，但是不保证对应正确，仅供参考。
+Note that this plugin does not support MLE (Memory Limit Exceeded) penalties. Additionally, TLE (Time Limit Exceeded) penalties are based on Real Time, not CPU Time. For debugging convenience, RE (Runtime Error) reports will provide return values and possible errors, but correctness is not guaranteed and is for reference only.
 
 ![](./demo/demo-judge-code.gif)
 
-### 一键编译调试
+### One-click Compile and Debug
 
-这个功能需要 Insight 软件，你可以在网上搜索 *如何安装 Insight 调试器* 来查询如何安装。下面可以提供一些常见系统的安装命令：
+This feature requires the Insight software. You can search online for *how to install Insight debugger* to find installation instructions. Here are some common installation commands for various systems:
 
 #### Arch Linux
 
@@ -107,6 +111,6 @@ sudo pacman -S insight
 sudo apt install insight
 ```
 
-安装后你只需要调用 `:DebugCode /some/code/file.cpp` 或者按下你所设置的快捷键来进行编译并调试。关于 Insight 软件的使用方法，可以自行上网查找。
+After installation, you only need to call `:DebugCode /some/code/file.cpp` or press your configured shortcut to compile and debug. You can search online for instructions on how to use Insight software.
 
 ![](./demo/demo-debug-code.gif)

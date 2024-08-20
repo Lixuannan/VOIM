@@ -116,8 +116,7 @@ def check_for_update():
         json_data = json.loads(data)
         last_update_stamp = int(datetime.datetime.strptime(str(json_data.get("updated_at")), "%Y-%m-%dT%H:%M:%SZ").timestamp())
         file_time_stamp = os.path.getmtime(path) - datetime.datetime.now().astimezone().utcoffset().total_seconds()
-        print(f"Remote Time Stamp: {datetime.datetime.fromtimestamp(last_update_stamp).isoformat()}, Local Time Stamp: {datetime.datetime.fromtimestamp(file_time_stamp).isoformat()}")
-
+    
     if file_time_stamp < last_update_stamp:
         print("Found New Version, updating")
         os.rename(path, path + ".bak")
@@ -145,7 +144,6 @@ if work_type != "update":
 
     filebase.pop(-1)
     filebase = "".join(filebase)
-
 
 if work_type == "runcode":
     if filetype == 'cpp' or filetype == 'cc':
