@@ -5,6 +5,8 @@ import os
 import subprocess
 import threading
 import time
+import datetime
+import urllib.request
 import json
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
@@ -105,28 +107,42 @@ def get_data(data_path: str):
     http_server.serve_forever()
 
 
-print("Checking for update")
-os.rename(path, path + ".bak")
-process = subprocess.Popen(f"curl https://raw.githubusercontent.com/Lixuannan/VOIM/main/lib/VOIM.py -o {path}".split(" "), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-output, error = process.communicate()
-returncode = process.returncode
-if returncode:
-    print("Download failed, rolling back, please don't close this window")
-    os.rename(path + ".bak", path)
-    print("Done with rollback")
-else:
-    print("Success")
+def check_for_update():
+    path = os.path.join(os.environ["HOME"], ".VOIM.py")
+    print("Checking for update")
+    with urllib.request.urlopen("https://api.github.com/repos/lixuannan/VOIM") as response:
+        data = response.read().decode('utf-8')
+        json_data = json.loads(data)
+        last_update_stamp = int(datetime.datetime.strptime(str(json_data.get("updated_at")), "%Y-%m-%dT%H:%M:%SZ").timestamp())
+        file_time_stamp = os.path.getmtime(path)
+
+    if file_time_stamp < last_update_stamp:
+        print("Found New Version, updating")
+        os.rename(path, path + ".bak")
+        process = subprocess.Popen(f"curl https://raw.githubusercontent.com/Lixuannan/VOIM/main/lib/VOIM.py -o {path}".split(" "), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        output, error = process.communicate()
+        returncode = process.returncode
+        if returncode:
+            print("Download failed, rolling back, please don't close this window")
+            os.rename(path + ".bak", path)
+            print("Done with rollback")
+        else:
+            print("Success")
+    else:
+        print("No new version found")
+
 
 work_type = sys.argv[1]
-filename = sys.argv[2]
-filetype = filename.split('.')[-1]
-filebase = list(filename)
+if work_type != "update":
+    filename = sys.argv[2]
+    filetype = filename.split('.')[-1]
+    filebase = list(filename)
 
-while filebase[-1] != '.':
+    while filebase[-1] != '.':
+        filebase.pop(-1)
+
     filebase.pop(-1)
-
-filebase.pop(-1)
-filebase = "".join(filebase)
+    filebase = "".join(filebase)
 
 
 if work_type == "runcode":
@@ -176,6 +192,7 @@ elif work_type == "judgecode":
         else:
             print("\033[1;31mUnsupport filetype detected, run failed\033[m")
             exit(0)
-
+else if work_type == "update":
+    check_for_update()
 
 

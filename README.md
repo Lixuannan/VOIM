@@ -23,6 +23,8 @@ call plug#end()
 
 然后在 vim 中输入命令 `:PlugInstall`。要更新插件，请在 vim 中输入命令 `:PlugUpdate`。
 
+由于插件的特殊性，无论你使用的是什么插件管理器，你都需要在使用对应插件的更新命令的同时使用 `:UpdateVOIM` 命令来更新 VOIM 的必要运行组件。 
+
 ## 配置
 
 我们定义了一个一键编译运行的命令 `:RunCode`，以及一键评测样例的命令 `:JudgeCode` 如果你要自定义快捷键，可以在 `.vimrc` 中这样写：

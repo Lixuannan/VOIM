@@ -5,9 +5,7 @@ import subprocess
 
 
 path = os.path.join(os.environ["HOME"], ".VOIM.py")
-try:
-    os.rename(path, path + ".bak")
-except FileNotFoundError:
+if not os.path.exist(path):
     print("Start downloading reqirements")
     process = subprocess.Popen(f"curl https://raw.githubusercontent.com/Lixuannan/VOIM/main/lib/VOIM.py -o {path}".split(" "), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     output, error = process.communicate()
@@ -23,4 +21,5 @@ EOF
 
 :command -nargs=1 RunCode !~/.VOIM.py runcode <q-args>
 :command -nargs=1 JudgeCode !~/.VOIM.py judgecode <q-args>
+:command -nargs=0 UpdateVOIM !~/.VOIM.py update
 
