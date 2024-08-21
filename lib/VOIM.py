@@ -77,7 +77,7 @@ def judge(cmd, time_limit, filename, input_, output):
         print("\033[1;32mAccept\033[0m")
 
     os.remove(f"{filename}.in")
-    os.remove(f"{filename}.and")
+    os.remove(f"{filename}.ans")
     os.remove(f"{filename}.out")
 
 
