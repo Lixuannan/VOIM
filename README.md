@@ -36,7 +36,7 @@ Due to the plugin's specific nature, regardless of the plugin manager you use, y
 
 ## Configuration
 
-We define a command for one-click compile and run as `:RunCode`, and a command for one-click sample testing as `:JudgeCode`. If you want to customize the shortcuts, you can add the following to your `.vimrc`:
+We define a command for one-click compile and run as `:RunCode`, and a command for one-click sample testing as `:JudgeCode`, and a command for one-click debug as `:DebugCode`. If you want to customize the shortcuts, you can add the following to your `.vimrc`:
 
 ```vimrc
 " Set global shortcuts, where % represents the current file name
