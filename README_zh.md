@@ -10,6 +10,10 @@ Things you have to know: this plugin only support Unix-like Operating System.
 
 一些您需要知道的问题：这个插件仅支持类 Unix 系统。
 
+If your file name contains space, you are on your own.
+
+当你的文件名包含空格时，耗子尾汁吧。
+
 ## 功能
 
 这个插件用于为 OIer 提供更方便的 VIM 使用体验，其功能如下：
