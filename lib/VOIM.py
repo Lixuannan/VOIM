@@ -9,6 +9,7 @@ import datetime
 import urllib.request
 import json
 import zoneinfo
+import tkinter as tk
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 
@@ -222,8 +223,4 @@ elif work_type == "clean":
         os.remove(filename + ".data")
     except FileNotFoundError:
         ...
-elif work_type == "copy":
-    with open(filename, "rt") as f:
-        pyperclip.copy(f.read())
-
 

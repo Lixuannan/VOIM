@@ -123,6 +123,3 @@ After installation, you only need to call `:DebugCode /some/code/file.cpp` or pr
 
 You can use command `:CleanCache /some/code/file.cpp` to clean build cache and data.
 
-### Copy Code
-
-Command `:CopyCode /some/code/file.cpp` is used to copy the code file into your clipboard. This function requires python module `pyperclip`.

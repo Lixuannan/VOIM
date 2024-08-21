@@ -123,6 +123,3 @@ yay -S insight
 
 你可以使用 `:CleanCache /some/code/file.cpp` 来清除代码的编译缓存以及缓存的数据。
 
-### 复制代码
-
-你可以使用命令 `:CopyCode /some/code/file.cpp` 来将代码文件中的代码复制到剪切板，方便提交。注意，这个功能需要 Python 包 `pyperclip` 支持。

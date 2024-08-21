@@ -19,10 +19,9 @@ for _ in os.popen(f"chmod 777 {path}"):
     ...
 EOF
 
+
 :command -nargs=1 RunCode !~/.VOIM.py runcode <q-args>
 :command -nargs=1 JudgeCode !~/.VOIM.py judgecode <q-args>
 :command -nargs=0 UpdateVOIM !~/.VOIM.py update
 :command -nargs=1 DebugCode !~/.VOIM.py debug <q-args>
 :command -nargs=1 CleanCache !~/.VOIM.py clean <q-args>
-:command -nargs=1 CopyCode !~/.VOIM.py copy <q-args>
-
