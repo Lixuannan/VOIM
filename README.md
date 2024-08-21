@@ -6,13 +6,13 @@ This is a Vim plugin.
 
 这是一个 VIM 插件。
 
-Things you have to know: this plugin only support Unix-like Operating System.
+## Warning
 
-一些您需要知道的问题：这个插件仅支持类 Unix 系统。
+Things you have to know: this plugin only support Unix-like Operating System.
 
 If your file name contains space, you are on your own.
 
-当你的文件名包含空格时，耗子尾汁吧。
+This plugin is stilling in development, it may contain lots of bugs.
 
 ## Features
 
