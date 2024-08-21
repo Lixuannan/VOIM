@@ -23,4 +23,5 @@ EOF
 :command -nargs=1 JudgeCode !~/.VOIM.py judgecode <q-args>
 :command -nargs=0 UpdateVOIM !~/.VOIM.py update
 :command -nargs=1 DebugCode !~/.VOIM.py debug <q-args>
+:command -nargs=1 CleanCache !~/.VOIM.py clean <q-args>
 

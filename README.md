@@ -114,3 +114,7 @@ yay -S insight
 After installation, you only need to call `:DebugCode /some/code/file.cpp` or press your configured shortcut to compile and debug. You can search online for instructions on how to use Insight software.
 
 ![](./demo/demo-debug-code.gif)
+
+### Clean Cache
+
+You can use command `:CleanCache /some/code/file.cpp` to clean build cache and data.

@@ -76,6 +76,10 @@ def judge(cmd, time_limit, filename, input_, output):
     else:
         print("\033[1;32mAccept\033[0m")
 
+    os.remove("{filename}.in")
+    os.remove("{filename}.and")
+    os.remove("{filename}.out")
+
 
 
 class CPHandler(BaseHTTPRequestHandler):
@@ -209,5 +213,15 @@ elif work_type == "debug":
         process.wait()
     except FileNotFoundError:
         print("\033[1;31mNo debugger found, please follow the install guide from https://sourceware.org/insight/downloads.php and install insight\033[m")
+elif work_type == "clean":
+    try:
+        os.remove(filebase)
+    except FileNotFoundError:
+        ...
+    try:
+        os.remove(filename + ".data")
+    except FileNotFoundError:
+        ...
+
 
 
