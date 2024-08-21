@@ -76,9 +76,9 @@ def judge(cmd, time_limit, filename, input_, output):
     else:
         print("\033[1;32mAccept\033[0m")
 
-    os.remove("{filename}.in")
-    os.remove("{filename}.and")
-    os.remove("{filename}.out")
+    os.remove(f"{filename}.in")
+    os.remove(f"{filename}.and")
+    os.remove(f"{filename}.out")
 
 
 
@@ -222,6 +222,8 @@ elif work_type == "clean":
         os.remove(filename + ".data")
     except FileNotFoundError:
         ...
-
+elif work_type == "copy":
+    with open(filename, "rt") as f:
+        pyperclip.copy(f.read())
 
 
