@@ -58,28 +58,37 @@ def judge(cmd, time_limit, filename, input_, output):
         f.write(output)
     
     cmd += f" < {filename}.in > {filename}.out"
-    start_time = time.process_time()
-    exit_code = os.system(cmd)
-    end_time = time.process_time()
+    
+    try:
+        result = subprocess.run(
+                cmd.split(" "),
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                timeout=time_limit / 1000 + 0.2
+            )
+        exit_code = result.returncode
 
-    if exit_code:
-        print(f"\033[1;35mRuntime Error, exit code: {exit_code}\033[m")
-        return
+        if exit_code:
+            print(f"\033[1;35mRuntime Error, exit code: {exit_code}\033[m")
+            return
 
-    diff = ""
-    for i in os.popen(f"diff -ZB {filename}.out {filename}.ans"):
-        diff += i
+        diff = ""
+        for i in os.popen(f"diff -ZB {filename}.out {filename}.ans"):
+            diff += i
 
-    if end_time - start_time > time_limit:
-        print("\033[1;33mTime Limit Exceeded\033[0m")
-    elif diff != "":
-        print(f"\033[1;31mWrong Answer, differences are bellow:\n{diff}\033[m")
-    else:
-        print("\033[1;32mAccept\033[0m")
+        if diff != "":
+            print(f"\033[1;31mWrong Answer, differences are bellow:\n{diff}\033[m")
+        else:
+            print("\033[1;32mAccept\033[0m")
+    except subprocess.TimeoutExpired:
+        print("\033[1;33mTime Limit Exceeded\033[m")
 
     os.remove(f"{filename}.in")
     os.remove(f"{filename}.ans")
-    os.remove(f"{filename}.out")
+    try:
+        os.remove(f"{filename}.out")
+    except FileNotFoundError:
+        ...
 
 
 
