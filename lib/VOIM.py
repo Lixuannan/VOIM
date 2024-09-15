@@ -201,9 +201,11 @@ elif work_type == "judgecode":
     for i in range(len(data["tests"])):
         print(f"Case {i + 1}: ", end="")
         if filetype == "cpp" or filetype == "cc" or filetype == "c":
-            judge(os.path.join('./', filebase), data["timeLimit"] / 1000, filename, data['tests'][i]['input'], data['tests'][i]['output'])
+            judge(os.path.join('./', filebase), data["timeLimit"], filename, 
+                  data['tests'][i]['input'], data['tests'][i]['output'])
         elif filetype == 'python':
-            judge(f"{PYTHON_INTERPRETER} {filename}", data["timeLimit"] / 1000, filename, data['tests'][i]['input'], data['tests'][i]['output'])
+            judge(f"{PYTHON_INTERPRETER} {filename}", data["timeLimit"], filename, 
+                  data['tests'][i]['input'], data['tests'][i]['output'])
         else:
             print("\033[1;31mUnsupport filetype detected, run failed\033[m")
             exit(0)
