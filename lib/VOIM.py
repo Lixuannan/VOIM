@@ -41,14 +41,13 @@ def compile(filename: str, outfile: str, compiler: str, argv: str) -> int:
 def run(cmd):
     start_cpu_time = time.process_time()
     start_real_time = time.time()
-    pro = subprocess.Popen(cmd.split(" "), stderr=subprocess.PIPE, stdout=subprocess.PIPE)
-    output, error = pro.communicate()
+    pro = subprocess.Popen(cmd.split(" "), stderr=sys.stderr, stdout=sys.stdout)
+    pro.wait()
     end_cpu_time = time.process_time()
     end_real_time = time.time()
     exit_code = pro.returncode
     
-    print(f"{output.decode('utf-8')}\n{error.decode('utf-8')}")
-    print(f"\033[1;37mProcess ended with code {exit_code}, real time: {round(end_real_time - start_real_time, 6)}s, cpu time: {round(end_cpu_time - start_cpu_time, 6)}s\033[m")
+    print(f"\033[1;37m\nProcess ended with code {exit_code}, real time: {round(end_real_time - start_real_time, 6)}s\033[m")
 
 
 def judge(cmd, time_limit, filename, input_, output):
